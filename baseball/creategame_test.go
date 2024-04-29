@@ -1,35 +1,25 @@
 package baseball
 
 import (
-	"fmt"
 	"testing"
 )
 
-type Game interface {
-}
-
-type gameNumbers struct {
-	nums string
-}
-
-func CreateGame(nums string) (Game, error) {
-	if len(nums) < 3 || len(nums) > 4 {
-		return nil, fmt.Errorf("invaild nums: %s", nums)
-	}
-	return &gameNumbers{nums: nums}, nil
-}
-
 func TestInvalidNums(t *testing.T) {
-	//length: 3 ~ 4
 	//Only numbers
 	//No same numbers
-	_, err := CreateGame("01")
+	assertError(t, "01")
+	assertError(t, "01456")
+	assertError(t, "abc")
+	assertError(t, "14z")
+	assertError(t, "a87a4")
+	assertError(t, "011")
+	assertError(t, "4400")
+}
+
+func assertError(t *testing.T, nums string) {
+	_, err := CreateGame(nums)
 	if err == nil {
-		t.Fatalf("Error must be returned: %s", "01")
-	}
-	_, err2 := CreateGame("01456")
-	if err2 == nil {
-		t.Fatalf("Error must be returned: %s", "01456")
+		t.Fatalf("error must be returned: %s", nums)
 	}
 }
 
