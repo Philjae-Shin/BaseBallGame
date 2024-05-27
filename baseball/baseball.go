@@ -1,12 +1,26 @@
 package baseball
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+type Score struct {
+}
 
 type Game interface {
+	guess(nums string) (Score, err)
 }
 
 type gameNumbers struct {
 	nums string
+}
+
+func (g gameNumbers) guess(nums string) (Score, error) {
+	if len(g.nums) != len(nums) {
+		return Score{}, errors.New("nums and nums have different lengths")
+	}
+	return Score{}, nil
 }
 
 func CreateGame(nums string) (Game, error) {
