@@ -21,6 +21,7 @@ func assertError(t *testing.T, nums string) {
 	if err == nil {
 		t.Fatalf("error must be returned: %s", nums)
 	}
+	return
 }
 
 func TestCreateGame(t *testing.T) {
@@ -33,5 +34,3 @@ func TestCreateGame(t *testing.T) {
 		t.Fatalf("Game must be returned")
 	}
 }
-
-//10:31
